@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy-950: #0a0e17;
+  --color-navy-900: #0f1629;
+  --color-navy-800: #1a2342;
+  --color-navy-700: #243055;
+  --color-navy-600: #334173;
+  --color-navy-500: #45548a;
+  --color-navy-400: #5a6b9e;
+  
+  --color-trading-green: #00d26a;
+  --color-trading-red: #ff3b5c;
+  --color-trading-cyan: #00d4ff;
+  --color-trading-gold: #ffd700;
+  
+  --font-inter: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+html {
+  font-family: var(--font-inter);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  @apply bg-navy-950 text-white min-h-screen;
+}
+
+#root {
+  @apply min-h-screen;
+}
+
+.loading-screen {
+  @apply min-h-screen flex items-center justify-center bg-navy-950;
+}
+
+.loading-spinner {
+  @apply w-12 h-12 border-3 border-navy-700 border-t-trading-cyan rounded-full animate-spin;
+}
+
+::-webkit-scrollbar {
+  @apply w-2 h-2;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-navy-900;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-navy-700 rounded;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-navy-600;
+}
+
+::selection {
+  @apply bg-trading-cyan/30 text-white;
+}
+
+input:focus {
+  @apply outline-none ring-2 ring-trading-cyan/50;
+}
