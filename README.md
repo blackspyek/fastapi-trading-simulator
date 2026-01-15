@@ -57,7 +57,7 @@ A full-stack paper trading platform for cryptocurrencies with real-time price da
 ```bash
 # Clone the repository
 git clone <repository-url>
-cd TradingSimulator
+cd .\fastapi-trading-simulator\
 
 # Start all services
 docker compose up --build
@@ -68,7 +68,17 @@ This will:
 2. Build and start **Backend** (runs migrations + seeds database)
 3. Build and start **Frontend** (nginx serving React app)
 
+# To stop and remove all services including volumes, use:
+```bash
+docker compose down -v
+
+```
+
 ### Access the application
+
+> **Disclaimer:**  
+> Server resource usage (**RAM** and **CPU**) is displayed on the frontend when hovering over **Connect** in the navigation bar.
+
 
 | Service   | URL                           |
 |-----------|-------------------------------|
