@@ -119,49 +119,6 @@ The seed script runs automatically when the backend container starts. It only se
 
 ---
 
-## 🛠️ Development Setup
-
-### Backend
-
-```bash
-cd backend
-
-# Create virtual environment
-python -m venv venv
-source venv/bin/activate  # Linux/macOS
-venv\Scripts\activate     # Windows
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Set environment variables
-export DATABASE_URL="postgresql+asyncpg://postgres:postgres@localhost:5432/trading_simulator"
-export SECRET_KEY="your-secret-key"
-
-# Run migrations
-alembic upgrade head
-
-# Seed database
-python seed.py
-
-# Start development server
-uvicorn app.main:app --reload
-```
-
-### Frontend
-
-```bash
-cd frontend
-
-# Install dependencies
-npm install
-
-# Start development server
-npm run dev
-```
-
----
-
 ## 📁 Project Structure
 
 ```
@@ -232,19 +189,6 @@ TradingSimulator/
 
 ---
 
-## 🧪 Running Tests
-
-```bash
-cd backend
-
-# Run all tests
-python -m pytest
-
-# Run with coverage
-python -m pytest --cov=app
-```
-
----
 
 ## ⚙️ Environment Variables
 
