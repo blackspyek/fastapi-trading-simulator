@@ -1,9 +1,3 @@
-"""
-Asset management service.
-
-Contains business logic for CRUD operations on cryptocurrencies.
-"""
-
 from typing import List, Optional
 from decimal import Decimal
 
