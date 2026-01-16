@@ -1,10 +1,3 @@
-"""
-Portfolio repository.
-
-Provides CRUD operations and helper methods
-for the Portfolio entity in the database.
-"""
-
 from decimal import Decimal
 from typing import Optional, List
 

@@ -1,10 +1,3 @@
-"""
-User repository.
-
-Provides CRUD operations and helper methods
-for the User entity in the database.
-"""
-
 from decimal import Decimal
 from typing import Optional, List
 

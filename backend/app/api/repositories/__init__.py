@@ -1,9 +1,3 @@
-"""
-Pakiet repozytoriów aplikacji TradingSimulator.
-
-Eksportuje wszystkie repozytoria do użycia w warstwie serwisów.
-"""
-
 from app.api.repositories.base import BaseRepository
 from app.api.repositories.user_repository import UserRepository
 from app.api.repositories.asset_repository import AssetRepository

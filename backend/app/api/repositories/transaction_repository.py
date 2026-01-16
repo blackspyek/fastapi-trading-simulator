@@ -1,10 +1,3 @@
-"""
-Transaction repository.
-
-Provides CRUD operations and helper methods
-for the Transaction entity in the database.
-"""
-
 from decimal import Decimal
 from typing import List
 

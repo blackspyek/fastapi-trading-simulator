@@ -8,6 +8,7 @@ from app.api.models.asset import Asset
 from app.api.repositories.asset_repository import AssetRepository
 from app.api.repositories.portfolio_repository import PortfolioRepository
 from app.api.repositories.transaction_repository import TransactionRepository
+from app.api.repositories.price_history_repository import PriceHistoryRepository
 from app.api.schemas.asset import AssetCreate, AssetUpdate
 
 
@@ -47,7 +48,7 @@ class AssetService:
         asset_repo: AssetRepository,
         portfolio_repo: PortfolioRepository,
         transaction_repo: TransactionRepository,
-        price_history_repo: "PriceHistoryRepository",
+        price_history_repo: PriceHistoryRepository,
         db: AsyncSession,
         binance_client: Optional[object] = None
     ) -> None:

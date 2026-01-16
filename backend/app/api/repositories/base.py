@@ -1,10 +1,3 @@
-"""
-Base module for repositories.
-
-Defines the BaseRepository class, which is an abstract pattern
-for all repositories in the application.
-"""
-
 from sqlalchemy.ext.asyncio import AsyncSession
 
 

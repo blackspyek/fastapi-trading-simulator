@@ -51,7 +51,7 @@ class AssetResponse(BaseModel):
     ticker: str
     name: str
     binance_symbol: str
-    current_price: Decimal
+    current_price: float
     is_active: bool
 
     model_config = ConfigDict(from_attributes=True)
@@ -71,6 +71,6 @@ class AssetPriceResponse(BaseModel):
     id: int
     ticker: str
     name: str
-    current_price: Decimal
+    current_price: float
 
     model_config = ConfigDict(from_attributes=True)

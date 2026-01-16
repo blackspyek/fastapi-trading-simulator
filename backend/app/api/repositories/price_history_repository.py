@@ -1,10 +1,3 @@
-"""
-Price history repository.
-
-Provides operations for saving and fetching
-asset price history.
-"""
-
 from decimal import Decimal
 from typing import List
 from datetime import datetime, timedelta
