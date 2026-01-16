@@ -32,7 +32,6 @@ class TradeService:
         _db: Database session for commit/rollback.
     """
 
-    # Constant for initial balance
     INITIAL_BALANCE = Decimal("100000.00")
 
     def __init__(
@@ -124,21 +123,14 @@ class TradeService:
         Raises:
             HTTPException: 404 if user doesn't exist.
         """
-        # Uses nested eager loading - single query with JOIN instead of N+1
         user = await self._user_repo.get_by_id_with_portfolio(user_id)
         if not user:
             raise HTTPException(status_code=404, detail="User not found.")
 
-        assets_list: List[Dict[str, Any]] = []
-        total_assets_value: Decimal = Decimal(0)
-
-        # Fetch transaction history to calculate average buy price
         transactions = await self._transaction_repo.get_by_user(user_id)
         
-        # Map: asset_ticker -> { 'total_cost': Decimal, 'quantity': Decimal, 'avg_price': Decimal }
         asset_stats = {}
 
-        # Sort transactions from oldest to properly reconstruct history
         transactions.sort(key=lambda x: x.timestamp)
 
         for tx in transactions:
@@ -149,38 +141,30 @@ class TradeService:
             stats = asset_stats[ticker]
             
             if tx.type == "BUY":
-                # Increase quantity and total cost
                 stats['quantity'] += tx.amount
                 stats['total_cost'] += tx.amount * tx.price_at_transaction
                 
-                # Update average price (weighted average)
                 if stats['quantity'] > 0:
                     stats['avg_price'] = stats['total_cost'] / stats['quantity']
                 
             elif tx.type == "SELL":
-                # Decrease quantity and cost proportionally to average price
-                # (assuming we sell "averaged" units, which doesn't change the average buy price of remaining)
                 stats['quantity'] -= tx.amount
                 stats['total_cost'] -= tx.amount * stats['avg_price']
                 
-                # If we sold everything, reset (or leave at 0)
                 if stats['quantity'] <= 0:
                     stats['quantity'] = Decimal(0)
                     stats['total_cost'] = Decimal(0)
                     stats['avg_price'] = Decimal(0)
 
-        # Build assets list
         assets_list: List[Dict[str, Any]] = []
         total_assets_value: Decimal = Decimal(0)
 
-        # Portfolio and Asset are already loaded via selectinload
         for p in user.portfolio:
-            asset = p.asset  # Already loaded - no additional query!
+            asset = p.asset
             if asset:
                 value = p.quantity * asset.current_price
                 total_assets_value += value
                 
-                # Get calculated average price
                 avg_price = Decimal(0)
                 if asset.ticker in asset_stats:
                     avg_price = asset_stats[asset.ticker]['avg_price']

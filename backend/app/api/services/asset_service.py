@@ -121,7 +121,6 @@ class AssetService:
         Raises:
             HTTPException: 400 if ticker or binance_symbol already exists.
         """
-        # Normalize symbols to uppercase
         data.ticker = data.ticker.upper().strip()
         data.binance_symbol = data.binance_symbol.upper().strip()
 
@@ -145,7 +144,6 @@ class AssetService:
             binance_symbol=data.binance_symbol
         )
 
-        # Try to fetch initial price immediately
         initial_price = await self._fetch_initial_price(data.binance_symbol)
         if initial_price:
             asset.current_price = initial_price
@@ -172,7 +170,6 @@ class AssetService:
             asset.name = data.name
         if data.binance_symbol is not None:
             asset.binance_symbol = data.binance_symbol.upper().strip()
-            # If symbol changes, try to update price
             initial_price = await self._fetch_initial_price(asset.binance_symbol)
             if initial_price:
                 asset.current_price = initial_price
@@ -215,9 +212,6 @@ class AssetService:
         """
         asset = await self.get_by_id(asset_id)
 
-        # Cascading delete of related data
-        # We call delete unconditionally to avoid lazy loading issues (MissingGreenlet)
-        # and because delete statements are idempotent (no-op if empty).
         await self._portfolio_repo.delete_by_asset_id(asset_id)
         await self._transaction_repo.delete_by_asset_id(asset_id)
         await self._price_history_repo.delete_by_asset_id(asset_id)

@@ -6,7 +6,7 @@ Thumbs.db
 *.log
 *.swp
 
-.env
+../.env
 .env.*
 !.env.example
 *.pem
@@ -19,7 +19,7 @@ __pycache__/
 venv/
 .venv/
 env/
-.env/
+../.env/
 
 .pytest_cache/
 .coverage

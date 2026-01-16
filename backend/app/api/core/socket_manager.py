@@ -42,7 +42,6 @@ class ConnectionManager:
         Args:
             message (Dict[str, Any]): Dictionary of data to send as JSON.
         """
-        # Iterating over a copy of the list [:] to safely modify the original list if needed
         for connection in self.active_connections[:]:
             try:
                 await connection.send_json(message)
